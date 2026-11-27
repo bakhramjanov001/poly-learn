@@ -6,10 +6,6 @@ Is This a Website or an App?
 
 Right now: It is a website / web application (index.html) that runs directly in a web browser.
 
-As a phone app: Once you add PWA support (manifest.json + sw.js) and host it over HTTPS (for example on GitHub Pages, Netlify, or Vercel), users can install it on their phone's home screen like a standalone app.
-
-App Store and Google Play: Publishing to official app stores costs money (Apple Developer — $99/year, Google Play — $25 one-time fee). Using PWA is a fast, free way to let users install it on their phones.
-
 Key Features
 
 5 Languages: German (de), Russian (ru), English (en), Turkish (tr), and Arabic (ar).
