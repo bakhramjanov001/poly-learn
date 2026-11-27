@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0720">
+<meta name="author" content="Bunyodbek">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>PolyLingua — Made by Bunyodbek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Noto+Naskh+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--c1:#7c5cff;--c2:#ff4fa3;--c3:#22d3ee;--ok:#34d399;--bad:#fb7185;--tx:#f1edff;--mu:#a79fcf;--g:rgba(255,255,255,.07);--b:rgba(255,255,255,.14)}
+body{font-family:Sora,Noto Naskh Arabic,system-ui,sans-serif;background:#0b0720;color:var(--tx);min-height:100vh;overflow-x:hidden;padding-bottom:96px}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.42;z-index:-1;animation:fl 16s ease-in-out infinite}
+.b1{width:440px;height:440px;background:var(--c1);top:-120px;left:-120px}
+.b2{width:400px;height:400px;background:var(--c2);right:-120px;bottom:-100px;animation-delay:-6s}
+.b3{width:260px;height:260px;background:var(--c3);top:40%;left:55%;animation-delay:-11s}
+@keyframes fl{50%{transform:translate(70px,-50px) scale(1.18)}}
+.wrap{max-width:900px;margin:auto;padding:14px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.logo{font-weight:800;font-size:24px;background:linear-gradient(90deg,var(--c3),var(--c1),var(--c2),var(--c3));background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+.logo small{display:block;font-size:11px;font-weight:600;-webkit-text-fill-color:var(--mu);letter-spacing:.3px}
+@keyframes sh{to{background-position:300%}}
+.pills{display:flex;gap:4px;background:var(--g);padding:4px;border-radius:18px;border:1px solid var(--b)}
+.pill{border:0;background:none;color:var(--mu);padding:8px 11px;border-radius:14px;font:700 13px Sora,Noto Naskh Arabic,system-ui,sans-serif;cursor:pointer;transition:.3s cubic-bezier(.3,1.6,.5,1)}
+.pill.on{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;transform:scale(1.1)}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:20;display:flex;justify-content:center;gap:4px;background:rgba(11,7,32,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--b);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+.nt{flex:1;max-width:150px;border:0;background:none;color:var(--mu);font:700 12px Sora,Noto Naskh Arabic,system-ui,sans-serif;padding:8px 4px;border-radius:16px;cursor:pointer;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nt i{font-style:normal;font-size:22px;transition:.3s}
+.nt.on{color:#fff;background:var(--g)}.nt.on i{transform:translateY(-4px) scale(1.25)}
+.tab{display:none}.tab.on{display:block;animation:up .5s both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+.g{background:var(--g);border:1px solid var(--b);border-radius:26px;padding:18px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);margin-bottom:14px}
+h1{font-size:clamp(24px,5.5vw,36px);line-height:1.15;font-weight:800}
+h2{font-size:17px;font-weight:800;margin-bottom:4px}
+p,.mu{color:var(--mu);font-size:13px;line-height:1.5}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.hero{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.btn{border:0;border-radius:16px;padding:12px 16px;font:700 14px Sora,Noto Naskh Arabic,system-ui,sans-serif;color:#fff;cursor:pointer;background:linear-gradient(135deg,var(--c1),var(--c2));transition:.2s;box-shadow:0 10px 26px -10px var(--c1)}
+.btn:hover{transform:translateY(-3px) scale(1.04)}.btn:active{transform:scale(.95)}
+.btn.s{background:var(--g);border:1px solid var(--b);box-shadow:none}
+.btn.ok{background:linear-gradient(135deg,#10b981,#06b6d4)}.btn.bad{background:linear-gradient(135deg,#f43f5e,#fb923c)}
+.btn.sm{padding:8px 11px;font-size:12px;border-radius:12px}
+input,select,textarea{width:100%;background:rgba(255,255,255,.08);border:1.5px solid var(--b);border-radius:14px;padding:12px;color:var(--tx);font:600 15px Sora,Noto Naskh Arabic,system-ui,sans-serif;outline:0;transition:.2s}
+input:focus,select:focus,textarea:focus{border-color:var(--c1);box-shadow:0 0 0 4px rgba(124,92,255,.25)}
+select option{color:#111}
+label{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10px 0 5px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.lc{border:2px solid var(--b);background:var(--g);border-radius:20px;padding:14px;color:var(--tx);cursor:pointer;text-align:left;font:700 14px Sora,Noto Naskh Arabic,system-ui,sans-serif;transition:.3s cubic-bezier(.3,1.6,.5,1)}
+.lc:hover{transform:translateY(-5px) rotate(-1.5deg)}.lc.on{border-color:var(--c3);background:rgba(34,211,238,.12)}
+.lc b{font-size:30px;display:block;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.stat{text-align:center;padding:14px}.stat b{display:block;font-size:28px;font-weight:800}
+.fire{display:inline-block;animation:fire 1s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes fire{50%{transform:scale(1.25) rotate(-6deg)}}
+.ring{position:relative;width:132px;height:132px}.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:11;stroke-linecap:round}
+#rf{stroke:url(#gr);stroke-dasharray:327;stroke-dashoffset:327;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.9,.3,1)}
+.rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.rc b{font-size:30px;font-weight:800}
+.bar{height:8px;background:var(--g);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c3),var(--c1),var(--c2));border-radius:9px;transition:width .5s}
+.bc{background:var(--g);border:1px solid var(--b);border-radius:18px;padding:14px;cursor:pointer;color:var(--tx);text-align:left;font:700 14px Sora,Noto Naskh Arabic,system-ui,sans-serif;transition:.3s;animation:pop .5s both;animation-delay:calc(var(--i,0)*60ms)}
+.bc:hover{transform:translateY(-4px);border-color:var(--c1)}
+@keyframes pop{from{opacity:0;transform:scale(.8)}}
+.c3d{perspective:1100px}
+.fc{position:relative;height:300px;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.2,.9,.3,1.25);cursor:pointer}
+.fc.f{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;overflow:auto;border:1px solid var(--b)}
+.front{background:linear-gradient(145deg,rgba(124,92,255,.4),rgba(255,255,255,.06))}
+.back{transform:rotateY(180deg);background:linear-gradient(145deg,rgba(255,79,163,.42),rgba(34,211,238,.22))}
+.big{font-size:clamp(28px,8vw,44px);font-weight:800;word-break:break-word}
+.pr{color:#c4b5fd;font-weight:600}
+.ctl{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:10px;margin-top:14px}
+.chars{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chars button{min-width:40px;height:40px;border-radius:12px;border:1px solid var(--b);background:var(--g);color:var(--tx);font:700 17px Sora,Noto Naskh Arabic,system-ui,sans-serif;cursor:pointer;transition:.15s}
+.chars button:active{transform:scale(.85);background:var(--c1)}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:12px}
+.opt{border:2px solid var(--b);background:var(--g);color:var(--tx);border-radius:18px;padding:15px;font:700 15px Sora,Noto Naskh Arabic,system-ui,sans-serif;text-align:left;cursor:pointer;transition:.2s}
+.opt:hover:not(:disabled){border-color:var(--c3);transform:translateX(5px)}
+.opt.ok{border-color:var(--ok);background:rgba(52,211,153,.2);animation:pulse .5s}
+.opt.bad{border-color:var(--bad);background:rgba(251,113,133,.2);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes pulse{50%{transform:scale(1.04)}}
+.q{text-align:center;padding:22px 10px}
+.fb{border-radius:18px;padding:14px;margin-top:12px;font-size:14px;line-height:1.6;animation:pop .35s}
+.fb.ok{background:rgba(52,211,153,.18);border:1px solid var(--ok)}.fb.bad{background:rgba(251,113,133,.16);border:1px solid var(--bad);animation:shake .4s}
+.wi{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 4px;border-bottom:1px solid var(--b);animation:up .4s both;animation-delay:calc(var(--i,0)*30ms)}
+.wi:last-child{border:0}.wi b{font-size:16px}
+.tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(52,211,153,.2);color:var(--ok)}
+.md{position:fixed;inset:0;z-index:50;background:rgba(5,2,20,.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:14px;animation:fi .25s}
+@keyframes fi{from{opacity:0}}
+.md>div{background:#17102f;border:1px solid var(--b);border-radius:28px;padding:20px;width:100%;max-width:460px;max-height:92vh;overflow:auto;animation:pop .35s cubic-bezier(.3,1.5,.5,1)}
+.h{display:none!important}
+#toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;background:#fff;color:#1a1033;font:700 13px Sora,Noto Naskh Arabic,system-ui,sans-serif;padding:12px 16px;border-radius:16px;box-shadow:0 14px 40px -10px #000;display:flex;gap:12px;align-items:center;animation:drop .4s cubic-bezier(.3,1.6,.5,1);max-width:92vw}
+#toast button{border:0;background:var(--c1);color:#fff;border-radius:10px;padding:5px 10px;font:700 12px Sora,Noto Naskh Arabic,system-ui,sans-serif;cursor:pointer}
+@keyframes drop{from{transform:translate(-50%,-80px)}}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:70}
+.by{text-align:center;margin:26px 0 8px;font-size:13px;color:var(--mu)}
+.by b{background:linear-gradient(90deg,var(--c3),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.by span{display:inline-block;color:var(--c2);animation:hb 1.2s infinite}
+@keyframes hb{20%{transform:scale(1.4)}40%{transform:scale(1)}}
+button:focus-visible,.fc:focus-visible{outline:3px solid var(--c3);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<canvas id="cf"></canvas>
+<div class="wrap">
+<header>
+  <div class="logo">PolyLingua<small>Made by Bunyodbek</small></div>
+  <div class="pills" id="pills"></div>
+</header>
+
+<section class="tab" id="t-home">
+  <div class="g hero">
+    <div style="flex:1;min-width:230px">
+      <h1>Til o'rganishni o'yinga aylantiring ✨</h1>
+      <p style="margin:8px 0 14px">So'zlarni 20 talik bo'limlarda yodlang, talaffuzini tinglang va testda sinang.</p>
+      <div class="row"><button class="btn" data-a="tab" data-v="learn">🧠 O'rganish</button><button class="btn s" data-a="tab" data-v="quiz">🎯 Test</button><button class="btn s" data-a="add">＋ So'z</button></div>
+    </div>
+    <div class="ring"><svg width="132" height="132" viewBox="0 0 132 132"><defs><linearGradient id="gr"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#ff4fa3"/></linearGradient></defs><circle cx="66" cy="66" r="52" stroke="rgba(255,255,255,.1)"/><circle id="rf" cx="66" cy="66" r="52"/></svg><div class="rc"><b id="rn">0</b><small class="mu">/ <span id="rg">20</span> bugun</small></div></div>
+  </div>
+  <div class="grid" id="stats"></div>
+  <div class="g" style="margin-top:14px"><h2>Qaysi tilni o'rganyapsiz?</h2><p style="margin-bottom:12px">Har bir tilning so'zlari alohida saqlanadi</p><div class="grid" id="lcards"></div></div>
+  <div class="g"><h2>Kunlik maqsad</h2><p style="margin-bottom:10px">Bugun nechta so'z yodlamoqchisiz?</p>
+    <div class="row"><input id="goal" type="number" min="1" max="500" style="width:90px;text-align:center"><button class="btn s sm" data-a="goal" data-v="10">10</button><button class="btn s sm" data-a="goal" data-v="20">20</button><button class="btn s sm" data-a="goal" data-v="50">50</button><button class="btn s sm" data-a="goal" data-v="100">100</button></div></div>
+  <div class="g"><h2>Bo'limlar</h2><p style="margin-bottom:12px">Bosing va shu bo'limni o'rganing</p><div class="grid" id="hb"></div></div>
+</section>
+
+<section class="tab" id="t-learn">
+  <div class="g"><div class="row"><select id="lsel" style="flex:1;min-width:150px"></select>
+    <button class="btn s sm" id="dirb" data-a="dir"></button><button class="btn s sm" data-a="shuf">🔀</button>
+    <select id="spd" style="width:90px"><option value="0.6">0.6x</option><option value="0.8">0.8x</option><option value="0.9">0.9x</option><option value="1">1x</option></select></div>
+    <div class="row" style="justify-content:space-between;margin-top:12px"><span class="mu" id="lcnt"></span><span class="tag" id="lmem"></span></div>
+    <div class="bar" style="margin-top:8px"><i id="lbar" style="width:0"></i></div></div>
+  <div id="stage"></div>
+  <div class="ctl" id="lctl"><button class="btn s" data-a="prev">← Oldingi</button><button class="btn ok" id="memb" data-a="mem">✓ Yodladim</button><button class="btn s" data-a="next">Keyingi →</button></div>
+  <p style="text-align:center;margin-top:10px">Klaviatura: ← → almashtirish, Space — aylantirish</p>
+</section>
+
+<section class="tab" id="t-quiz">
+  <div class="g" id="qsetup"><h2>🎯 Bilimni sinash</h2><p>Bo'lim, test turi va savollar sonini tanlang.</p>
+    <label>Bo'lim</label><select id="qb"></select>
+    <label>Test turi</label><select id="qt"><option value="t2u">Chet tili → O'zbekcha (yozma)</option><option value="u2t">O'zbekcha → Chet tili (yozma)</option><option value="choice">4 variantli test</option></select>
+    <label>Savollar soni</label><select id="qc"><option value="10">10</option><option value="20">20</option><option value="999">Hammasi</option></select>
+    <button class="btn" style="width:100%;margin-top:16px" data-a="qstart">Testni boshlash 🚀</button></div>
+  <div class="g h" id="qact">
+    <div class="row" style="justify-content:space-between"><b id="qprog"></b><span class="tag" id="qscore"></span></div>
+    <div class="bar" style="margin:10px 0"><i id="qbar" style="width:0"></i></div>
+    <div class="q"><span class="tag" id="qdir"></span><div class="big" id="qq" dir="auto" style="margin:10px 0 4px"></div><div class="pr" id="qpr"></div><button class="btn s sm h" id="qaud" data-a="qspeak" style="margin-top:8px">🔊 Eshitish</button></div>
+    <div id="qtype"><div class="chars" id="qch"></div><input id="qin" dir="auto" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false"><button class="btn" style="width:100%;margin-top:10px" data-a="qcheck">Tekshirish</button></div>
+    <div class="opts h" id="qopts"></div>
+    <div id="qfb"></div>
+    <button class="btn h" id="qnext" style="width:100%;margin-top:12px" data-a="qnext">Keyingi (Enter) →</button>
+  </div>
+  <div class="g h" id="qres" style="text-align:center"><div style="font-size:60px" id="qem">🏆</div><h1 id="qrt"></h1><p id="qrs" style="margin:6px 0 14px"></p><div id="qml" style="text-align:left;max-height:260px;overflow:auto"></div>
+    <div class="row" style="margin-top:14px;justify-content:center"><button class="btn bad h" id="qretry" data-a="qretry">🔁 Xatolarni takrorlash</button><button class="btn" data-a="qstart">Qayta</button><button class="btn s" data-a="qreset">Sozlamalar</button></div></div>
+</section>
+
+<section class="tab" id="t-words">
+  <div class="g"><div class="row" style="justify-content:space-between"><h2>📚 Lug'at</h2><button class="btn sm" data-a="add">＋ Yangi so'z</button></div>
+    <input id="srch" placeholder="🔎 Qidirish..." style="margin:12px 0"><div class="row" id="wpills"></div></div>
+  <div class="g" id="wlist"></div>
+  <div class="g"><h2>📄 PDF qilib saqlash</h2><p style="margin-bottom:12px">Tanlangan tildagi barcha so'zlaringizni chiroyli PDF fayl qilib yuklab oling.</p><button class="btn" data-a="exp">⬇ PDF yuklab olish</button></div>
+</section>
+
+<div class="by">Made with <span>♥</span> by <b>Bunyodbek</b></div>
+</div>
+
+<nav>
+  <button class="nt" data-a="tab" data-v="home"><i>🏠</i>Asosiy</button>
+  <button class="nt" data-a="tab" data-v="learn"><i>🧠</i>O'rganish</button>
+  <button class="nt" data-a="tab" data-v="quiz"><i>🎯</i>Test</button>
+  <button class="nt" data-a="tab" data-v="words"><i>📚</i>Lug'at</button>
+</nav>
+
+<div class="md h" id="md"><div>
+  <div class="row" style="justify-content:space-between"><h2 id="mt">Yangi so'z</h2><button class="btn s sm" data-a="close">✕</button></div>
+  <div class="row" id="mmodes" style="margin:10px 0"><button class="btn sm" data-a="mode" data-v="one">Bitta</button><button class="btn s sm" data-a="mode" data-v="bulk">Ko'plab</button></div>
+  <form id="f1"><label id="lw">So'z *</label><input id="iw" required dir="auto"><div class="chars" id="mch"></div><label>O'qilishi</label><input id="ip"><label>Tarjimasi *</label><input id="im" required>
+    <button class="btn" style="width:100%;margin-top:14px">Saqlash</button></form>
+  <form id="f2" class="h"><label>Har qatorga bittadan: so'z - tarjima</label><textarea id="ib" rows="7" placeholder="1. der Hund - it&#10;2. die Katze - mushuk"></textarea><button class="btn" style="width:100%;margin-top:14px">Barchasini qo'shish</button></form>
+</div></div>
+<div id="toast" class="h"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const BS=20,KEY='polylingua_v4';
+const LG={de:{f:'🇩🇪',n:'Nemis tili',v:'de-DE',ch:['ä','ö','ü','ß']},ru:{f:'🇷🇺',n:'Rus tili',v:'ru-RU',ch:['ё']},en:{f:'🇬🇧',n:'Ingliz tili',v:'en-US',ch:[]},tr:{f:'🇹🇷',n:'Turk tili',v:'tr-TR',ch:['ç','ğ','ı','İ','ö','ş','ü']},ar:{f:'🇸🇦',n:'Arab tili',v:'ar-SA',ch:['ء','ة','ى','أ','إ','آ','ؤ','ئ']}};
+const SEED={
+de:[['der Apfel','der apfel','olma'],['das Buch','das bux','kitob'],['die Schule','di shule','maktab'],['der Freund','der froynt',"do'st"],['das Wasser','das vasser','suv'],['die Stadt','di shtat','shahar'],['die Zeit','di tsayt','vaqt'],['das Haus','das haus','uy']],
+ru:[['книга','kniga','kitob'],['вода','voda','suv'],['солнце','solntse','quyosh'],['город','gorod','shahar'],['друг','drug',"do'st"],['время','vremya','vaqt'],['дом','dom','uy'],['ёж','yozh','tipratikan']],
+en:[['knowledge','nolij','bilim'],['journey','jyorni','sayohat'],['improve','impruv','yaxshilamoq'],['decision','disijn','qaror'],['neighbor','neybor',"qo'shni"],['challenge','chelenj','sinov'],['house','haus','uy'],['friend','frend',"do'st"]],
+tr:[['kitap','kitap','kitob'],['okul','okul','maktab'],['arkadaş','arkadash',"do'st"],['şehir','shehir','shahar'],['zaman','zaman','vaqt'],['güzel','gyuzel','chiroyli'],['ev','ev','uy'],['su','su','suv']],
+ar:[['كتاب','kitāb','kitob'],['ماء','mā\'','suv'],['شمس','shams','quyosh'],['مدينة','madīna','shahar'],['صديق','sadīq',"do'st"],['وقت','waqt','vaqt'],['بيت','bayt','uy'],['مدرسة','madrasa','maktab']]};
+const ds=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>ds(new Date()),yday=()=>{const d=new Date();d.setDate(d.getDate()-1);return ds(d)};
+function def(){const v={};for(const l in SEED)v[l]=SEED[l].map((a,i)=>({id:l+'_s'+i,word:a[0],pron:a[1],meaning:a[2],mem:false,b:0}));
+  return{lang:'de',tab:'home',goal:20,done:{d:today(),ids:[]},streak:{last:'',n:0},vocab:v,sel:{de:0,ru:0,en:0,tr:0,ar:0},dir:'t2u',speed:.9}}
+function fix(s){const b=def();const v=Object.assign({},b.vocab,s.vocab||{});s=Object.assign(b,s);s.vocab=v;if(![0.6,0.8,0.9,1].includes(+s.speed))s.speed=0.9;s.sel=Object.assign({de:0,ru:0,en:0,tr:0,ar:0},s.sel);
+  for(const l in s.vocab){if(!Array.isArray(s.vocab[l]))s.vocab[l]=[];s.vocab[l].forEach((w,i)=>{if(w.b==null)w.b=Math.floor(i/BS);if(w.mem==null)w.mem=!!w.memorized})}
+  if(!LG[s.lang])s.lang='de';if(!['home','learn','quiz','words'].includes(s.tab))s.tab='home';
+  if(!s.done||!Array.isArray(s.done.ids)||s.done.d!==today())s.done={d:today(),ids:[]};if(!s.streak)s.streak={last:'',n:0};return s}
+function load(){try{const r=localStorage.getItem(KEY)||localStorage.getItem('polylingua_v3_state');if(r)return fix(JSON.parse(r))}catch(e){}return def()}
+let S=load();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const W=(l=S.lang)=>S.vocab[l]||(S.vocab[l]=[]);
+const NB=(l=S.lang)=>Math.max(1,...W(l).map(w=>w.b+1));
+const BW=(l,b)=>W(l).filter(w=>w.b===b);
+const selB=()=>{const n=Math.min(S.sel[S.lang]||0,NB()-1);S.sel[S.lang]=n;return n};
+
+function mark(id){if(S.done.d!==today())S.done={d:today(),ids:[]};
+  if(!S.done.ids.includes(id)){S.done.ids.push(id);
+    if(S.streak.last!==today()){S.streak.n=S.streak.last===yday()?S.streak.n+1:1;S.streak.last=today()}}
+  save();rHome()}
+let tt;function toast(m,lbl,fn){const t=$('#toast');t.innerHTML='<span>'+E(m)+'</span>'+(lbl?'<button>'+E(lbl)+'</button>':'');t.classList.remove('h');
+  if(lbl)t.querySelector('button').onclick=()=>{fn();t.classList.add('h')};clearTimeout(tt);tt=setTimeout(()=>t.classList.add('h'),lbl?5000:2600)}
+function boom(){const c=$('#cf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+  const P=Array.from({length:150},()=>({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*18,vy:Math.random()*-17-4,s:5+Math.random()*7,c:'hsl('+Math.random()*360+',90%,62%)',r:Math.random()*6}));let n=0;
+  (function f(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.vy+=.36;p.x+=p.vx;p.y+=p.vy;p.r+=.2;x.fillStyle=p.c;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);x.restore()});
+  if(++n<120)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()}
+
+/* speech */
+function pickVoice(l){const m=LG[l],vs=speechSynthesis.getVoices()||[],lc=m.v.toLowerCase(),p=lc.slice(0,2),off=!navigator.onLine;let best=null,bs=-1e9;
+  vs.forEach(x=>{const vl=(x.lang||'').replace('_','-').toLowerCase();if(!vl.startsWith(p))return;
+    const n=(x.name||'').toLowerCase();let sc=0;
+    if(vl===lc)sc+=20;
+    if(/neural|natural|enhanced|premium|wavenet|studio/.test(n))sc+=30;
+    if(/google/.test(n))sc+=10;
+    if(/espeak|compact|robot/.test(n))sc-=40;
+    if(x.localService)sc+=off?100:3;else if(off)sc-=100;
+    if(sc>bs){bs=sc;best=x}});
+  return best}
+function say(text,l=S.lang){if(!text)return;const m=LG[l];
+  if(window.AndroidBridge&&typeof AndroidBridge.speak==='function'){AndroidBridge.speak(text,m.v,S.speed);return}
+  if(!('speechSynthesis' in window))return;
+  const vs=speechSynthesis.getVoices()||[],v=pickVoice(l);
+  if(vs.length&&!v){toast(m.n+" ovozi qurilmada yo'q. Telefon sozlamalaridan ovoz paketini yuklang.");return}
+  speechSynthesis.cancel();setTimeout(()=>{const u=new SpeechSynthesisUtterance(text);u.lang=m.v;u.rate=S.speed;u.pitch=1;u.volume=1;if(v)u.voice=v;speechSynthesis.speak(u)},80)}
+if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
+
+/* answer checking */
+const nz=s=>String(s||'').trim().replace(/\s+/g,' ').replace(/[ʻʼ‘’`´ʹ]/g,"'");
+const AR=s=>s.replace(/[\u064B-\u0652\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى|ی/g,'ي').replace(/ة/g,'ه').replace(/ک/g,'ك').replace(/ؤ/g,'و').replace(/ئ/g,'ي');
+const fold=(s,l)=>l==='de'?s.replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/Ä/g,'Ae').replace(/Ö/g,'Oe').replace(/Ü/g,'Ue')
+  :l==='tr'?s.replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı|İ/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u')
+  :l==='ru'?s.replace(/ё/g,'е'):l==='ar'?AR(s):s;
+const up=s=>/^\p{Lu}/u.test(s);
+function check(u,e,l){u=nz(u);e=nz(e);const SP="Imlo mos kelmadi",CP="Nemis otlari bosh harf bilan yoziladi";
+  if(l==='de'){const m=/^(der|die|das)\s+(.+)$/i,a=u.match(m),b=e.match(m);
+    if(b){if(!a||a[1].toLowerCase()!==b[1].toLowerCase())return"Artikl (der/die/das) noto'g'ri yoki yo'q";
+      if(up(b[2])&&!up(a[2]))return CP;return fold(a[2],l)===fold(b[2],l)?'':SP}
+    if(up(e)&&!up(u))return CP;return fold(u,l)===fold(e,l)?'':SP}
+  const lo=x=>l==='tr'?x.replace(/İ/g,'i').replace(/I/g,'ı').toLowerCase():x.toLowerCase();return fold(lo(u),l)===fold(lo(e),l)?'':SP}
+function checkMean(u,e){u=nz(u).toLowerCase();if(!u)return false;const x=nz(e).toLowerCase();return u===x||x.split(/[\/,;]+/).map(s=>s.trim()).includes(u)}
+
+/* nav */
+function go(t){S.tab=t;save();$$('.tab').forEach(s=>s.classList.toggle('on',s.id==='t-'+t));$$('.nt').forEach(b=>b.classList.toggle('on',b.dataset.v===t));
+  if(t==='home')rHome();if(t==='learn')rLearn();if(t==='quiz'&&!Q)rQSetup();if(t==='words')rWords();scrollTo({top:0,behavior:'smooth'})}
+function rPills(){$('#pills').innerHTML=Object.keys(LG).map(l=>'<button class="pill'+(l===S.lang?' on':'')+'" data-a="lang" data-v="'+l+'">'+LG[l].f+' '+l.toUpperCase()+'</button>').join('')}
+function rHome(){const n=S.done.ids.length,g=Math.max(1,+S.goal||20),p=Math.min(1,n/g);
+  $('#rn').textContent=n;$('#rg').textContent=g;$('#rf').style.strokeDashoffset=327*(1-p);$('#goal').value=g;
+  const all=Object.values(S.vocab).flat(),mem=all.filter(w=>w.mem).length;
+  $('#stats').innerHTML=[['<span class="fire">🔥</span> '+S.streak.n,'kun ketma-ket'],['✅ '+mem,'yodlangan so\'z'],['📖 '+all.length,'jami so\'z']].map((a,i)=>'<div class="g stat" style="animation:pop .5s both;animation-delay:'+i*90+'ms;margin:0"><b>'+a[0]+'</b><span class="mu">'+a[1]+'</span></div>').join('');
+  $('#lcards').innerHTML=Object.keys(LG).map(l=>'<button class="lc'+(l===S.lang?' on':'')+'" data-a="lang" data-v="'+l+'"><b>'+LG[l].f+'</b>'+LG[l].n+'<div class="mu">'+W(l).length+" so'z</div></button>").join('');
+  $('#hb').innerHTML=Array.from({length:NB()},(_,i)=>{const ws=BW(S.lang,i),m=ws.filter(w=>w.mem).length;
+    return'<button class="bc" style="--i:'+i+'" data-a="openb" data-v="'+i+'">'+(i+1)+'-bo\'lim<div class="mu">'+m+'/'+ws.length+' yodlandi</div><div class="bar" style="margin-top:8px"><i style="width:'+(ws.length?m/ws.length*100:0)+'%"></i></div></button>'}).join('')}
+
+/* learn */
+let L={k:'',o:[],i:0,f:false};
+function curW(){return W().find(w=>w.id===L.o[L.i])}
+function rLearn(){const l=S.lang,sel=selB(),ws=BW(l,sel),k=l+sel+ws.map(w=>w.id).join();
+  if(L.k!==k){L={k,o:ws.map(w=>w.id),i:0,f:false}}
+  $('#lsel').innerHTML=Array.from({length:NB()},(_,i)=>'<option value="'+i+'"'+(i===sel?' selected':'')+'>'+(i+1)+"-bo'lim ("+BW(l,i).length+'/20)</option>').join('');
+  $('#spd').value=String(S.speed);$('#dirb').textContent=S.dir==='t2u'?l.toUpperCase()+' → UZ':'UZ → '+l.toUpperCase();
+  const m=ws.filter(w=>w.mem).length;$('#lmem').textContent=m+' / '+ws.length+' yodlandi';
+  const w=curW();
+  if(!w){$('#lctl').classList.add('h');$('#lcnt').textContent='0 / 0';$('#lbar').style.width='0';
+    $('#stage').innerHTML='<div class="g" style="text-align:center"><div style="font-size:44px">📭</div><h2>Bu bo\'limda so\'z yo\'q</h2><p style="margin:6px 0 12px">Birinchi so\'zingizni qo\'shing!</p><button class="btn" data-a="add">＋ So\'z qo\'shish</button></div>';return}
+  $('#lctl').classList.remove('h');$('#lcnt').textContent=(L.i+1)+' / '+L.o.length;$('#lbar').style.width=((L.i+1)/L.o.length*100)+'%';
+  const mb=$('#memb');mb.textContent=w.mem?'✓ Yodlangan':'✓ Yodladim';mb.className='btn '+(w.mem?'s':'ok');
+  const t=S.dir==='t2u',sp='<button class="btn s sm" data-a="speak" data-v="'+w.id+'">🔊 Eshitish</button>';
+  const wd='<div class="big" dir="auto">'+E(w.word)+'</div>'+(w.pron?'<div class="pr">['+E(w.pron)+']</div>':'')+sp,md='<div class="big" dir="auto">'+E(w.meaning)+'</div>';
+  $('#stage').innerHTML='<div class="c3d"><div class="fc'+(L.f?' f':'')+'" data-a="flip" tabindex="0"><div class="face front">'+(t?wd:md)+'<span class="mu">Aylantirish uchun bosing</span></div><div class="face back">'+(t?md:wd)+'<span class="mu">Qaytarish uchun bosing</span></div></div></div>'}
+function step(d){if(!L.o.length)return;L.i=(L.i+d+L.o.length)%L.o.length;L.f=false;rLearn()}
+
+/* words */
+let WB=0;
+function rWords(){const l=S.lang,q=nz($('#srch').value).toLowerCase(),n=NB();if(WB>=n)WB=0;
+  $('#wpills').innerHTML=q?'':Array.from({length:n},(_,i)=>'<button class="btn sm'+(i===WB?'':' s')+'" data-a="wb" data-v="'+i+'">'+(i+1)+'-bo\'lim · '+BW(l,i).length+'</button>').join('');
+  const ws=q?W(l).filter(w=>(w.word+w.meaning).toLowerCase().includes(q)):BW(l,WB);
+  $('#wlist').innerHTML=ws.length?ws.map((w,i)=>'<div class="wi" style="--i:'+i+'"><div style="min-width:0"><b dir="auto">'+E(w.word)+'</b> '+(w.pron?'<span class="pr">['+E(w.pron)+']</span> ':'')+(w.mem?'<span class="tag">✓</span>':'')+'<div class="mu">'+E(w.meaning)+'</div></div><div class="row" style="flex-shrink:0"><button class="btn s sm" data-a="speak" data-v="'+w.id+'">🔊</button><button class="btn s sm" data-a="edit" data-v="'+w.id+'">✏️</button><button class="btn s sm" data-a="del" data-v="'+w.id+'">🗑️</button></div></div>').join(''):'<p style="text-align:center;padding:14px">So\'z topilmadi. Yangi so\'z qo\'shing!</p>'}
+
+/* modal */
+let editId=null;
+function chars(box,inp){const l=S.lang;box.innerHTML=LG[l].ch.map(c=>'<button type="button">'+c+'</button>').join('');
+  box.onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=$(inp),s=i.selectionStart??i.value.length,t=i.selectionEnd??s;i.value=i.value.slice(0,s)+b.textContent+i.value.slice(t);i.focus();i.setSelectionRange(s+1,s+1)}}
+function openM(id){editId=id||null;const w=id&&W().find(x=>x.id===id);
+  $('#mt').textContent=w?"So'zni tahrirlash":'Yangi so\'z · '+LG[S.lang].f;$('#mmodes').classList.toggle('h',!!w);$('#lw').textContent=LG[S.lang].n+' so\'zi *';
+  $('#iw').value=w?w.word:'';$('#ip').value=w?w.pron:'';$('#im').value=w?w.meaning:'';$('#ib').value='';mode('one');chars($('#mch'),'#iw');
+  $('#md').classList.remove('h');setTimeout(()=>$('#iw').focus(),60)}
+function mode(m){$('#f1').classList.toggle('h',m!=='one');$('#f2').classList.toggle('h',m!=='bulk')}
+const closeM=()=>$('#md').classList.add('h');
+function addW(word,pron,meaning){const l=S.lang,ws=W(l),mb=Math.max(0,...ws.map(w=>w.b));
+  const b=ws.length?(BW(l,mb).length<BS?mb:mb+1):0;ws.push({id:l+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),word,pron,meaning,mem:false,b})}
+const dup=(word,ex)=>W().some(w=>w.id!==ex&&nz(w.word).toLowerCase()===nz(word).toLowerCase());
+$('#f1').onsubmit=e=>{e.preventDefault();const word=nz($('#iw').value),pron=nz($('#ip').value),meaning=nz($('#im').value);if(!word||!meaning)return;
+  if(dup(word,editId)){toast("Bu so'z allaqachon bor");return}
+  if(editId){Object.assign(W().find(w=>w.id===editId),{word,pron,meaning})}else addW(word,pron,meaning);
+  save();closeM();rAll();toast(editId?'Saqlandi ✓':"So'z qo'shildi ✓")};
+$('#f2').onsubmit=e=>{e.preventDefault();let ok=0,bad=0,dp=0;
+  $('#ib').value.split('\n').forEach(line=>{line=line.replace(/^\s*\d+[.)]\s*/,'').trim();if(!line)return;
+    const p=line.split(/\s+[-–—:]\s+|\t+/);if(p.length<2){bad++;return}
+    const w=nz(p[0]),m=nz(p.slice(1).join(' - '));if(!w||!m){bad++;return}if(dup(w)){dp++;return}addW(w,'',m);ok++});
+  if(!ok){toast("Hech narsa qo'shilmadi. Format: so'z - tarjima (tire atrofida bo'sh joy bilan)");return}
+  save();closeM();rAll();toast(ok+" ta so'z qo'shildi"+(bad?', '+bad+' qator o\'qilmadi':'')+(dp?', '+dp+' takror':''))};
+
+/* quiz */
+let Q=null;
+function rQSetup(){const n=NB(),v=$('#qb').value;$('#qb').innerHTML='<option value="all">Hamma bo\'limlar ('+W().length+')</option>'+Array.from({length:n},(_,i)=>'<option value="'+i+'">'+(i+1)+"-bo'lim ("+BW(S.lang,i).length+')</option>').join('');if(v&&$('#qb option[value="'+v+'"]'))$('#qb').value=v;
+  ['qsetup'].forEach(i=>$('#'+i).classList.remove('h'));$('#qact').classList.add('h');$('#qres').classList.add('h')}
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function startQ(pool,type,cnt){const all=W();
+  if(type==='choice'&&new Set(all.map(w=>w.meaning)).size<4){toast("4 variantli test uchun kamida 4 ta turli so'z kerak");return}
+  if(!pool.length){toast("Bu bo'limda so'z yo'q");return}
+  const qs=shuf(pool).slice(0,cnt).map((w,i)=>({w,ask:type==='t2u'?'t':type==='u2t'?'u':(i%2?'t':'u'),mode:type==='choice'?'c':'w',done:false}));
+  Q={lang:S.lang,type,cnt,qs,i:0,sc:0,miss:[]};$('#qsetup').classList.add('h');$('#qres').classList.add('h');$('#qact').classList.remove('h');rQ()}
+function rQ(){const q=Q.qs[Q.i],n=Q.qs.length,m=LG[Q.lang];
+  $('#qprog').textContent='Savol '+(Q.i+1)+' / '+n;$('#qscore').textContent='Ball: '+Q.sc;$('#qbar').style.width=(Q.i/n*100)+'%';
+  $('#qdir').textContent=q.ask==='t'?Q.lang.toUpperCase()+' → UZ':'UZ → '+Q.lang.toUpperCase();
+  $('#qq').textContent=q.ask==='t'?q.w.word:q.w.meaning;$('#qpr').textContent=q.ask==='t'&&q.w.pron?'['+q.w.pron+']':'';$('#qaud').classList.toggle('h',q.ask!=='t');
+  $('#qfb').innerHTML='';$('#qnext').classList.add('h');const qa=$('#qq').parentElement;qa.style.animation='none';qa.offsetHeight;qa.style.animation='pop .4s';
+  if(q.mode==='w'){$('#qtype').classList.remove('h');$('#qopts').classList.add('h');const i=$('#qin');i.value='';i.disabled=false;i.placeholder=q.ask==='t'?'Tarjimasi':LG[Q.lang].n+' so\'zi';
+    q.ask==='u'?chars($('#qch'),'#qin'):($('#qch').innerHTML='');setTimeout(()=>i.focus(),60)}
+  else{$('#qtype').classList.add('h');const o=$('#qopts');o.classList.remove('h');const key=q.ask==='t'?'meaning':'word',cor=q.w[key];
+    const ds=shuf([...new Set(W(Q.lang).filter(w=>w.id!==q.w.id).map(w=>w[key]).filter(x=>x!==cor))]).slice(0,3);q.opts=shuf([cor,...ds]);
+    o.innerHTML=q.opts.map((t,i)=>'<button class="opt" dir="auto" data-a="qopt" data-v="'+i+'">'+E(t)+'</button>').join('')}}
+function fin(ok,user,exp,why){const q=Q.qs[Q.i];q.done=true;
+  if(ok){Q.sc++;mark(q.w.id)}else Q.miss.push({w:q.w,user,exp,why});
+  $('#qscore').textContent='Ball: '+Q.sc;
+  $('#qfb').innerHTML=ok?'<div class="fb ok">✅ To\'g\'ri! <b dir="auto">'+E(exp)+'</b></div>':'<div class="fb bad">❌ Xato'+(why?' ('+E(why)+')':'')+'<br>Sizniki: <b dir="auto">'+E(user)+'</b><br>To\'g\'ri javob: <b dir="auto">'+E(exp)+'</b></div>';
+  const last=Q.i+1>=Q.qs.length;$('#qnext').textContent=last?'Natijani ko\'rish 🏁':'Keyingi (Enter) →';$('#qnext').classList.remove('h');$('#qin').disabled=true}
+function qCheck(){const q=Q.qs[Q.i];if(q.done)return;const v=$('#qin').value;if(!nz(v))return;
+  if(q.ask==='t'){const ok=checkMean(v,q.w.meaning);fin(ok,v,q.w.meaning,ok?'':'Imlo mos kelmadi')}
+  else{const r=check(v,q.w.word,Q.lang);fin(!r,v,q.w.word,r)}}
+function qOpt(i,btn){const q=Q.qs[Q.i];if(q.done)return;const key=q.ask==='t'?'meaning':'word',cor=q.w[key],ch=q.opts[i];
+  $$('.opt').forEach(b=>{b.disabled=true;if(q.opts[b.dataset.v]===cor)b.classList.add('ok')});if(ch!==cor)btn.classList.add('bad');fin(ch===cor,ch,cor,'')}
+function qNext(){if(Q.i+1<Q.qs.length){Q.i++;rQ();return}
+  const n=Q.qs.length,p=Math.round(Q.sc/n*100);$('#qact').classList.add('h');$('#qres').classList.remove('h');
+  $('#qem').textContent=p>=90?'🏆':p>=70?'🎉':p>=40?'💪':'🌱';$('#qrt').textContent=p>=70?'Ajoyib natija!':p>=40?'Yomon emas!':'Davom eting!';$('#qrs').textContent=Q.sc+' / '+n+' ('+p+'%)';
+  $('#qml').innerHTML=Q.miss.length?Q.miss.map(m=>'<div class="wi"><div><b dir="auto">'+E(m.w.word)+'</b><div class="mu">'+E(m.w.meaning)+'</div></div><span class="mu">siz: '+E(m.user)+'</span></div>').join(''):'<p style="text-align:center">Hammasi to\'g\'ri! 🎯</p>';
+  $('#qretry').classList.toggle('h',!Q.miss.length);if(p>=70)boom()}
+
+/* pdf */
+const NONET="Internetga ulanmagansiz. PDF yaratish uchun internet kerak";
+const LIBS=[['jspdf','https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'],['html2canvas','https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js']];
+const ldScript=src=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=()=>{e.remove();no()};document.head.appendChild(e)});
+async function pdfLibs(){const need=LIBS.filter(a=>!window[a[0]]);if(!need.length)return true;if(!navigator.onLine)return false;
+  try{await Promise.all(need.map(a=>ldScript(a[1])));return !!(window.jspdf&&window.html2canvas)}catch(e){return false}}
+async function exportPDF(){
+  const l=S.lang,ws=W(l);let box;
+  if(!ws.length){toast("Lug'at bo'sh. Avval so'z qo'shing");return}
+  if(!await pdfLibs()){toast(NONET);return}
+  toast('PDF tayyorlanmoqda...');
+  try{
+    await (document.fonts&&document.fonts.ready);
+    const pages=[],CAP=820,est=w=>{const a=Math.ceil((w.word.length+(w.pron?w.pron.length+3:0))/24)||1,m=Math.ceil(w.meaning.length/26)||1;return 14+24*Math.max(a,m)+3};
+    for(let b=0;b<NB(l);b++){const bw=BW(l,b);if(!bw.length)continue;let cur=[],h=0,o=0,first=true;
+      bw.forEach(w=>{const e=est(w);if(h+e>CAP&&cur.length){pages.push({b,bw:cur,o,c:!first});o+=cur.length;cur=[];h=0;first=false}cur.push(w);h+=e});
+      if(cur.length)pages.push({b,bw:cur,o,c:!first})}
+    const mem=ws.filter(w=>w.mem).length,tot=pages.length,date=today();
+    box=document.createElement('div');box.style.cssText='position:fixed;left:-10000px;top:0;width:794px';
+    box.innerHTML=pages.map((p,pi)=>'<div class="pg" style="width:794px;height:1123px;position:relative;overflow:hidden;background:#fff;color:#1a1033;font-family:Sora,Noto Naskh Arabic,sans-serif;box-sizing:border-box">'
+     +'<div style="height:130px;padding:34px 44px;color:#fff;background:linear-gradient(135deg,#7c5cff,#ff4fa3);position:relative;overflow:hidden;box-sizing:border-box">'
+     +'<div style="position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.15)"></div>'
+     +'<div style="position:absolute;right:120px;top:70px;width:90px;height:90px;border-radius:50%;background:rgba(34,211,238,.35)"></div>'
+     +'<div style="font-size:30px;font-weight:800;position:relative">PolyLingua</div>'
+     +'<div style="font-size:14px;margin-top:6px;position:relative">'+E(LG[l].n)+" lug'ati · "+ws.length+" so'z · "+mem+' yodlangan · '+date+'</div></div>'
+     +'<div style="padding:22px 44px 0;box-sizing:border-box"><div style="display:inline-block;background:#efeaff;color:#5b3fd9;font-weight:800;font-size:15px;padding:7px 16px;border-radius:99px;margin-bottom:14px">'+(p.b+1)+"-bo'lim"+(p.c?" (davomi)":"")+'</div>'
+     +p.bw.map((w,i)=>'<div style="display:flex;align-items:center;gap:12px;padding:7px 14px;margin-bottom:3px;border-radius:12px;background:'+(i%2?'#fff':'#f7f4ff')+'">'
+        +'<span style="width:26px;color:#a79fcf;font-size:12px;font-weight:700">'+(p.o+i+1)+'</span>'
+        +'<span dir="auto" style="flex:1.2;font-size:16px;font-weight:800;line-height:24px">'+E(w.word)+(w.pron?' <span style="font-size:12px;font-weight:600;color:#7c5cff">['+E(w.pron)+']</span>':'')+'</span>'
+        +'<span style="flex:1;font-size:15px;color:#3b2f63;line-height:24px">'+E(w.meaning)+'</span>'
+        +'<span style="width:20px;color:#10b981;font-weight:800">'+(w.mem?'✓':'')+'</span></div>').join('')
+     +'</div><div style="position:absolute;left:44px;right:44px;bottom:26px;display:flex;justify-content:space-between;font-size:12px;color:#a79fcf;border-top:1px solid #e9e4ff;padding-top:10px"><span>Made with ♥ by <b style="color:#7c5cff">Bunyodbek</b></span><span>'+(pi+1)+' / '+tot+'</span></div></div>').join('');
+    document.body.appendChild(box);await (document.fonts&&document.fonts.ready);await new Promise(r=>setTimeout(r,250));
+    const pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),els=box.querySelectorAll('.pg');
+    for(let i=0;i<els.length;i++){const c=await html2canvas(els[i],{scale:2,backgroundColor:'#ffffff'});if(i)pdf.addPage();pdf.addImage(c.toDataURL('image/jpeg',.92),'JPEG',0,0,210,297)}
+    const fn='polylingua-'+l+'-'+date+'.pdf';
+    if(window.AndroidBridge&&typeof AndroidBridge.savePdf==='function'){AndroidBridge.savePdf(pdf.output('datauristring').split(',')[1],fn)}else{pdf.save(fn)}
+    toast('PDF yuklab olindi ✓');
+  }catch(e){toast("PDF yaratib bo'lmadi. Qayta urinib ko'ring")}
+  finally{if(box)box.remove()}
+}
+
+/* actions */
+const A={
+tab:v=>go(v),lang:v=>{S.lang=v;L.k='';Q=null;WB=0;save();rPills();go(S.tab==='home'?'home':S.tab)},
+goal:v=>{S.goal=Math.max(1,Math.min(500,parseInt(v)||20));save();rHome()},
+openb:v=>{S.sel[S.lang]=+v;go('learn')},
+flip:()=>{L.f=!L.f;$('.fc').classList.toggle('f',L.f)},prev:()=>step(-1),next:()=>step(1),
+dir:()=>{S.dir=S.dir==='t2u'?'u2t':'t2u';L.f=false;save();rLearn()},
+shuf:()=>{L.o=shuf(L.o);L.i=0;L.f=false;rLearn()},
+mem:()=>{const w=curW();if(!w)return;w.mem=!w.mem;if(w.mem){mark(w.id);boom()}save();rLearn();rHome()},
+speak:v=>{const w=W().find(x=>x.id===v);if(w)say(w.word)},
+qstart:()=>{const b=$('#qb').value,type=$('#qt').value,c=+$('#qc').value;startQ(b==='all'?W():BW(S.lang,+b),type,c)},
+qcheck:qCheck,qopt:(v,b)=>qOpt(+v,b),qnext:qNext,qspeak:()=>{const q=Q.qs[Q.i];say(q.w.word,Q.lang)},
+qretry:()=>startQ(Q.miss.map(m=>m.w),Q.type,999),qreset:()=>{Q=null;rQSetup()},
+add:()=>openM(),edit:v=>openM(v),close:closeM,mode:v=>mode(v),wb:v=>{WB=+v;rWords()},
+del:v=>{const ws=W(),i=ws.findIndex(w=>w.id===v);if(i<0)return;const w=ws[i];ws.splice(i,1);save();rAll();toast('"'+w.word+'" o\'chirildi','Qaytarish',()=>{W().splice(i,0,w);save();rAll()})},
+exp:exportPDF};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.v,t)});
+$('#md').addEventListener('click',e=>{if(e.target.id==='md')closeM()});
+$('#lsel').onchange=e=>{S.sel[S.lang]=+e.target.value;save();rLearn()};
+$('#spd').onchange=e=>{S.speed=+e.target.value;save()};
+$('#goal').onchange=e=>A.goal(e.target.value);
+$('#srch').oninput=rWords;
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeM();
+  const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if(S.tab==='quiz'&&Q&&!$('#qact').classList.contains('h')&&e.key==='Enter'){e.preventDefault();Q.qs[Q.i].done?qNext():(Q.qs[Q.i].mode==='w'&&qCheck())}
+  if(S.tab==='learn'&&!typing&&$('#md').classList.contains('h')){const a=document.activeElement,free=a===document.body||(a.classList&&a.classList.contains('fc'));if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);if(free&&(e.key===' '||e.key==='Enter')){e.preventDefault();A.flip()}}});
+function rAll(){rPills();rHome();if(S.tab==='learn')rLearn();if(S.tab==='words')rWords();if(S.tab==='quiz'&&!Q)rQSetup()}
+rPills();go(S.tab||'home');
+console.log('PolyLingua — made by Bunyodbek');
+</script>
+</body>
+</html>
